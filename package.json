@@ -2,6 +2,10 @@
   "name": "@fiad/toolbox",
   "version": "2.2.0",
   "description": "A smart collection of tools and utilities for Javascript development",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiadone/toolbox.git"
+  },
   "keywords": [
     "javascript",
     "tools",
@@ -9,6 +13,10 @@
   ],
   "author": "Andrea 'Fiad' Fiadone",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fiadone/toolbox/issues"
+  },
+  "homepage": "https://github.com/fiadone/toolbox",
   "peerDependencies": {
     "gsap": ">= 3"
   },
