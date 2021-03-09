@@ -21,6 +21,7 @@ npm i @fiad/toolbox
 ## Contents
 
 * [component](./component)
+* [cursor](./cursor)
 * [detect](./detect)
 * [events-bus](./events-bus)
 * [share-manager](./share-manager)
