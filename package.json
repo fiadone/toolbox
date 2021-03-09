@@ -1,0 +1,22 @@
+{
+  "name": "@fiad/toolbox",
+  "version": "2.2.0",
+  "description": "A smart collection of tools and utilities for Javascript development",
+  "keywords": [
+    "javascript",
+    "tools",
+    "utilities"
+  ],
+  "author": "Andrea 'Fiad' Fiadone",
+  "license": "MIT",
+  "peerDependencies": {
+    "gsap": ">= 3"
+  },
+  "dependencies": {
+    "ismobilejs": "^1.1.1",
+    "ua-parser-js": "^0.7.23"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
