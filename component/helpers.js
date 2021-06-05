@@ -5,7 +5,7 @@ import Component from './'
  * Attaches components to DOM elements
  * @param {object} components The components mapping object
  * @param {(HTMLDocument|Element)} root The components root element
- * @returns {Map} The component instances collection
+ * @returns {object} The component instances collection
  */
 export function attach(components = {}, root = document) {
   const instances = {}
@@ -30,7 +30,17 @@ export function attach(components = {}, root = document) {
       }
     }
 
-    instances[key] = new C(el, props)
+    const instance = new C(el, props)
+
+    if (instances.hasOwnProperty(key)) {
+      if (Array.isArray(instances[key])) {
+        instances[key].push(instance)
+      } else {
+        instances[key] = [instances[key], instance]
+      }
+    } else {
+      instances[key] = instance
+    }
   })
 
   return instances
@@ -42,7 +52,13 @@ export function attach(components = {}, root = document) {
  */
 export function detach(components = {}) {
   Object.entries(components).forEach(([key, component]) => {
-    try { component.destroy() } catch {}
+    if (Array.isArray(component)) {
+      component.forEach(entry => {
+        try { entry.destroy() } catch {}  
+      })
+    } else {
+      try { component.destroy() } catch {}
+    }
     delete components[key]
   })
 }
