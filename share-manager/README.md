@@ -11,7 +11,7 @@ npm i @fiad/toolbox
 ```
 
 ```js
-import ShareManager from '@fiad/toolbox/share'
+import ShareManager from '@fiad/toolbox/share-manager'
 ```
 
 ## Methods
@@ -95,7 +95,7 @@ HTML
 JS
 
 ```js
-import ShareManager from '@fiad/toolbox/share'
+import ShareManager from '@fiad/toolbox/share-manager'
 
 ShareManager.listenClicks()
 ```
@@ -103,7 +103,7 @@ ShareManager.listenClicks()
 #### Manual sharing
 
 ```js
-import ShareManager from '@fiad/toolbox/share'
+import ShareManager from '@fiad/toolbox/share-manager'
 
 const fbShareTrigger = document.getElementById('js-share-fb')
 const customShareTrigger = document.getElementById('js-share-custom')

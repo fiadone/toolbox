@@ -15,7 +15,7 @@ class ShareManager {
    * @static
    * @param {Event} e The triggered click event
    */
-  static #onTriggerClick = delegate(e => {
+  static #onTriggerClick = delegate('[data-share-target]', e => {
     e.preventDefault()
 
     ShareManager.share(
@@ -27,7 +27,7 @@ class ShareManager {
           return acc
         }, {})
     )
-  }, '[data-share-target]')
+  })
   /**
    * Enables a listener to handle clicks on trigger elements
    */

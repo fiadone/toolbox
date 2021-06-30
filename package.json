@@ -1,6 +1,6 @@
 {
   "name": "@fiad/toolbox",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A smart collection of tools and utilities for Javascript development",
   "repository": {
     "type": "git",
