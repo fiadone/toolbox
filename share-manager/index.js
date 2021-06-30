@@ -5,7 +5,6 @@
  */
 
 import delegate from '../utils/delegate'
-import { capitalize } from '../utils/string'
 import * as generators from './generators'
 
 class ShareManager {
@@ -15,15 +14,15 @@ class ShareManager {
    * @static
    * @param {Event} e The triggered click event
    */
-  static #onTriggerClick = delegate('[data-share-target]', e => {
+  static #onTriggerClick = delegate('[data-share-target]', (e, target) => {
     e.preventDefault()
 
     ShareManager.share(
       Object
-        .entries(e.target.dataset)
-        .filter(([ key ]) => key.match(/^Share[A-Za-z]+$/))
+        .entries(target.dataset)
+        .filter(([ key ]) => /^share[A-Za-z]+$/.test(key))
         .reduce((acc, [key, value]) => {
-          acc[capitalize(key)] = value
+          acc[key.replace('share', '').toLowerCase()] = value
           return acc
         }, {})
     )
