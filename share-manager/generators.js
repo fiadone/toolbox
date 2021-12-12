@@ -5,12 +5,16 @@
  */
 
 import QueryString from '../utils/query-string'
+import { retrieveMetaData } from './helpers'
+
+const META_DATA = retrieveMetaData()
 
 /**
  * Whatsapp share link generator
  * @param {object} data The data to be shared
  */
-export function whatsapp({ url = window.location.href, description } = {}) {
+export function whatsapp(data) {
+  const { url, description } = { ...META_DATA, ...data }
   const text = description ? `${description} ${url}` : url
   return `https://wa.me/?text=${encodeURIComponent(text)}`
 }
@@ -19,7 +23,8 @@ export function whatsapp({ url = window.location.href, description } = {}) {
  * Telegram share link generator
  * @param {object} data The data to be shared
  */
-export function telegram({ url = window.location.href, description } = {}) {
+export function telegram(data) {
+  const { url, description } = { ...META_DATA, ...data }
   const queryString = `?url=${url}&text=${description}`
   return `https://telegram.me/share/url${encodeURIComponent(queryString)}`
 }
@@ -28,7 +33,8 @@ export function telegram({ url = window.location.href, description } = {}) {
  * Facebook share link generator
  * @param {object} data The data to be shared
  */
-export function facebook({ url = window.location.href } = {}) {
+export function facebook(data) {
+  const { url } = { ...META_DATA, ...data }
   return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
 }
 
@@ -36,7 +42,8 @@ export function facebook({ url = window.location.href } = {}) {
  * Twitter share link generator
  * @param {object} data The data to be shared
  */
-export function twitter({ url = window.location.href, description } = {}) {
+export function twitter(data) {
+  const { url, description } = { ...META_DATA, ...data }
   const status = description ? `${url} ${description}` : url
   return `https://twitter.com/home?status=${encodeURIComponent(status)}`
 }
@@ -45,7 +52,8 @@ export function twitter({ url = window.location.href, description } = {}) {
  * Google+ share link generator
  * @param {object} data The data to be shared
  */
-export function googleplus({ url = window.location.href } = {}) {
+export function googleplus(data) {
+  const { url } = { ...META_DATA, ...data }
   return `https://plus.google.com/share?url=${encodeURIComponent(url)}`
 }
 
@@ -53,7 +61,8 @@ export function googleplus({ url = window.location.href } = {}) {
  * LinkedIn share link generator
  * @param {object} data The data to be shared
  */
-export function linkedin({ url = window.location.href, title, description } = {}) {
+export function linkedin(data) {
+  const { url, title, description } = { ...META_DATA, ...data }
   const queryString = `?mini=true&url=${url}&title=${title}&summary=${description}`
   return `https://www.linkedin.com/shareArticle${encodeURIComponent(queryString)}`
 }
@@ -62,7 +71,8 @@ export function linkedin({ url = window.location.href, title, description } = {}
  * Mail share link generator
  * @param {object} data The data to be shared
  */
-export function mail({ url = window.location.href, title, description } = {}) {
+export function mail(data) {
+  const { url, title, description } = { ...META_DATA, ...data }
   const body = description ? `${url} ${description}` : url
   return `mailto:?subject=${title}&body=${body}`
 }
@@ -71,10 +81,10 @@ export function mail({ url = window.location.href, title, description } = {}) {
  * Custom share link generator
  * @param {object} data The data to be shared
  */
-export function custom({ baseUrl, ...params } = {}) {
+export function custom({ baseUrl, ...data } = {}) {
   if (!baseUrl) {
     return
   }
 
-  return `${baseUrl}${QueryString.fromObject(params)}`
+  return `${baseUrl}${QueryString.fromObject({ ...META_DATA, ...data })}`
 }
