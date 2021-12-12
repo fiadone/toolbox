@@ -193,8 +193,10 @@ class Cursor extends Component {
 
     gsap.set(this.root, {
       position: 'fixed',
-      top: this.root.clientHeight * -origin[0],
-      left: this.root.clientWidth * -origin[1],
+      top: 0,
+      left: 0,
+      xPercent: 100 * -origin[0],
+      yPercent: 100 * -origin[1],
       zIndex: z,
       pointerEvents: 'none',
       onComplete: (typeof callback === 'function') ? callback : null
