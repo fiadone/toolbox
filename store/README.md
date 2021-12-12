@@ -61,7 +61,9 @@ store.reset()
 It adds a listener that runs the given callback when the given property is updated.
 
 ```js
-store.observe('someProp', value => console.log(value))
+const callback = value => console.log(value)
+
+store.observe('someProp', callback)
 
 // the updated value of someProp will be logged in the console on change
 ```
@@ -72,5 +74,5 @@ store.observe('someProp', value => console.log(value))
 It removes the listener registered for the given property.
 
 ```js
-store.unobserve('someProp')
+store.unobserve('someProp', callback)
 ```
