@@ -7,14 +7,13 @@
 import QueryString from '../utils/query-string'
 import { retrieveMetaData } from './helpers'
 
-const META_DATA = retrieveMetaData()
-
 /**
  * Whatsapp share link generator
  * @param {object} data The data to be shared
  */
 export function whatsapp(data) {
-  const { url, description } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url, description } = { ...defaults, ...data }
   const text = description ? `${description} ${url}` : url
   return `https://wa.me/?text=${encodeURIComponent(text)}`
 }
@@ -24,7 +23,8 @@ export function whatsapp(data) {
  * @param {object} data The data to be shared
  */
 export function telegram(data) {
-  const { url, description } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url, description } = { ...defaults, ...data }
   const queryString = `?url=${url}&text=${description}`
   return `https://telegram.me/share/url${encodeURIComponent(queryString)}`
 }
@@ -34,7 +34,8 @@ export function telegram(data) {
  * @param {object} data The data to be shared
  */
 export function facebook(data) {
-  const { url } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url } = { ...defaults, ...data }
   return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
 }
 
@@ -43,7 +44,8 @@ export function facebook(data) {
  * @param {object} data The data to be shared
  */
 export function twitter(data) {
-  const { url, description } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url, description } = { ...defaults, ...data }
   const status = description ? `${url} ${description}` : url
   return `https://twitter.com/home?status=${encodeURIComponent(status)}`
 }
@@ -53,7 +55,8 @@ export function twitter(data) {
  * @param {object} data The data to be shared
  */
 export function googleplus(data) {
-  const { url } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url } = { ...defaults, ...data }
   return `https://plus.google.com/share?url=${encodeURIComponent(url)}`
 }
 
@@ -62,7 +65,8 @@ export function googleplus(data) {
  * @param {object} data The data to be shared
  */
 export function linkedin(data) {
-  const { url, title, description } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url, title, description } = { ...defaults, ...data }
   const queryString = `?mini=true&url=${url}&title=${title}&summary=${description}`
   return `https://www.linkedin.com/shareArticle${encodeURIComponent(queryString)}`
 }
@@ -72,7 +76,8 @@ export function linkedin(data) {
  * @param {object} data The data to be shared
  */
 export function mail(data) {
-  const { url, title, description } = { ...META_DATA, ...data }
+  const defaults = retrieveMetaData()
+  const { url, title, description } = { ...defaults, ...data }
   const body = description ? `${url} ${description}` : url
   return `mailto:?subject=${title}&body=${body}`
 }
@@ -86,5 +91,7 @@ export function custom({ baseUrl, ...data } = {}) {
     return
   }
 
-  return `${baseUrl}${QueryString.fromObject({ ...META_DATA, ...data })}`
+  const defaults = retrieveMetaData()
+
+  return `${baseUrl}${QueryString.fromObject({ ...defaults, ...data })}`
 }
