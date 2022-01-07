@@ -41,6 +41,7 @@ __CONFIGURATION OBJECT__
 | origin | *number[]* | The position origin of the cursor (useful if a centering offset is needed). | *[0.5, 0.5]* |
 | z | *number* | The cursor z-index. | *9999* |
 | inertia | *number* | The lerping factor used to make cursor movements smoother (set to 1 for linear transformations). | *0.2* |
+| touch | *bool* | If true, the cursor will be enabled on touch events too | *false* |
 | triggers | *string[]* | The list of selectors to be observed around the DOM. | *['a', 'button', '[data-cursor]']* |
 | onShow | *function* | A callback to be invoked on cursor show event. | *undefined* |
 | onHide | *function* | A callback to be invoked on cursor hide event. | *undefined* |
@@ -72,10 +73,21 @@ It destroys all instance event listeners and removes all applied transformations
 ### @static init
 
 ```js
-Cursor.init()
+Cursor.init(props)
 ```
 
 It adds all event listeners aimed to globally collect pointing information. It's automatically called when a new instance of *Cursor* is created.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| props | *object* | A configuration object |
+
+
+__CONFIGURATION OBJECT__
+
+| Property | Type | Description | Default |
+| --- | --- | --- | --- |
+| touch | *bool* | If true, the cursor will be enabled on touch events too | *false* |
 
 
 ### @static get

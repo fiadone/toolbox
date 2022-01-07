@@ -118,21 +118,25 @@ class Cursor extends Component {
 
   /**
    * Initializes the global cursor instance
+   * @param {object} props The static cursor props
    * @static
    */
-  static init() {
+  static init({ touch = false } = {}) {
     if (Cursor.#initialized) return
 
     window.addEventListener('mousemove', Cursor.#onMove)
-    window.addEventListener('touchmove', Cursor.#onMove)
     document.addEventListener('mouseenter', Cursor.#onEnter)
     document.addEventListener('mouseleave', Cursor.#onLeave)
-    document.addEventListener('touchleave', Cursor.#onLeave)
     document.addEventListener('mousedown', Cursor.#onDown)
-    document.addEventListener('touchstart', Cursor.#onDown)
     document.addEventListener('mouseup', Cursor.#onUp)
-    document.addEventListener('touchend', Cursor.#onUp)
     document.addEventListener('mouseover', Cursor.#onOver)
+    
+    if (touch) {
+      window.addEventListener('touchmove', Cursor.#onMove)
+      document.addEventListener('touchleave', Cursor.#onLeave)
+      document.addEventListener('touchstart', Cursor.#onDown)
+      document.addEventListener('touchend', Cursor.#onUp)
+    }
   }
 
   /**
@@ -171,7 +175,7 @@ class Cursor extends Component {
    * @param {Element} el The custom cursor element
    * @param {object} props The cursor props
    */
-  constructor(el, props) {
+  constructor(el, { touch = false, ...props } = {}) {
     super(el, { ...Cursor.defaultProps, ...props })
 
     this.coords = null
@@ -179,7 +183,7 @@ class Cursor extends Component {
     this.#setup(() => {
       window.addEventListener('resize', this.#onResize)
       Cursor.#store.observe('coords', this.#init)
-      Cursor.init()
+      Cursor.init({ touch })
     })
   }
 
