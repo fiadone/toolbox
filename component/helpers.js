@@ -4,7 +4,7 @@ import Component from './'
 /**
  * Attaches components to DOM elements
  * @param {object} components The components mapping object
- * @param {(HTMLDocument|Element)} root The components root element
+ * @param {(Document|Element)} root The components root element
  * @returns {object} The component instances collection
  */
 export function attach(components = {}, root = document) {

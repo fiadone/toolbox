@@ -13,7 +13,7 @@ class Component {
    * @param {Element} el The element to mount the component on
    * @param {object} props The component props
    */
-  constructor(el, props = {}) {
+  constructor(el, props = {}) {
     this.root = el
     this.props = { ...props, ...this.#retrieveProps() }
     this.refs = this.#retrieveRefs()

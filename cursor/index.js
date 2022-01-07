@@ -246,7 +246,7 @@ class Cursor extends Component {
 
   /**
    * Handles the update of the cursor hover state according to the event target match test
-   * @param {(Element|HTMLDocument|null)} target The mouse/touch event target
+   * @param {(Element|Document|null)} target The mouse/touch event target
    */
   #checkTarget = target => {
     const { triggers = Cursor.defaultTriggers } = this.props
